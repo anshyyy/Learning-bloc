@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:learning_bloc/features/home/models/homeProductDataModel.dart';
+import 'package:learning_bloc/features/cart/bloc/cart_bloc.dart';
 
-import '../bloc/home_bloc.dart';
+import '../../home/models/homeProductDataModel.dart';
+import '../models/cartModelItem.dart';
 
-class ProductTileWidget extends StatelessWidget {
-  HomeBloc homeBloc;
+class CartTileWidget extends StatefulWidget {
+  CartBloc cartBloc;
   final ProductDataModel productDataModel;
-  ProductTileWidget(
-      {super.key, required this.homeBloc, required this.productDataModel});
+  CartTileWidget(
+      {super.key, required this.cartBloc, required this.productDataModel});
 
+  @override
+  State<CartTileWidget> createState() => _CartTileWidgetState();
+}
+
+class _CartTileWidgetState extends State<CartTileWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,8 +36,8 @@ class ProductTileWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image:
-                          NetworkImage(scale: 4.0, productDataModel.imageUrl))),
+                      image: NetworkImage(
+                          scale: 4.0, widget.productDataModel.imageUrl))),
             ),
           ),
           Container(
@@ -42,7 +46,7 @@ class ProductTileWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productDataModel.name,
+                  widget.productDataModel.name,
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -52,7 +56,7 @@ class ProductTileWidget extends StatelessWidget {
                 Container(
                   width: 170,
                   child: Text(
-                    productDataModel.description,
+                    widget.productDataModel.description,
                     style: TextStyle(color: Colors.black54, fontSize: 12),
                   ),
                 ),
@@ -68,7 +72,7 @@ class ProductTileWidget extends StatelessWidget {
                     ),
                     SizedBox(width: 20),
                     Text(
-                      "\$ " + productDataModel.price.toString(),
+                      "\$ " + widget.productDataModel.price.toString(),
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -82,19 +86,13 @@ class ProductTileWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          homeBloc.add(HomeProductWishlistButtonClickedEvent(
-                              clickedproduct: productDataModel));
-                        },
-                        icon: Icon(Icons.favorite_outlined)),
                     SizedBox(width: 10),
                     IconButton(
                         onPressed: () {
-                          homeBloc.add(HomeProductCartButtonClickedEvent(
-                              clickedproduct: productDataModel));
+                          widget.cartBloc.add(CartRemoveFromCartEvent(
+                              productDataModel: widget.productDataModel));
                         },
-                        icon: Icon(Icons.shopping_cart))
+                        icon: Icon(Icons.delete))
                   ],
                 )
               ],
