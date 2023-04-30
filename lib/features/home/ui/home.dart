@@ -67,6 +67,7 @@ class _HomeState extends State<Home> {
                         icon: Icon(Icons.shopping_cart_outlined)),
                   ],
                 ),
+                backgroundColor: Colors.teal[100],
                 body: ListView.builder(
                     shrinkWrap: true,
                     itemCount: 5,
