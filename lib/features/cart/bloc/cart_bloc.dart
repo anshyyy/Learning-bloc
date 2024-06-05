@@ -13,6 +13,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartInitial()) {
     on<CartInitalEvent>(cartInitalEvent);
     on<CartRemoveFromCartEvent>(cartRemoveFromCartEvent);
+    on<CheckOutButtonNavigateEvent>(navigateToCheckoutEvent);
   }
 
   FutureOr<void> cartInitalEvent(
@@ -25,5 +26,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final item = event.productDataModel;
     cartItems.remove(item);
     emit(CartSuccessState(cartItems: cartItems));
+  }
+
+  Future<void> navigateToCheckoutEvent(
+      CheckOutButtonNavigateEvent event, Emitter<CartState> emit) async {
+    emit(CartNavigateToCheckoutActionState());
   }
 }

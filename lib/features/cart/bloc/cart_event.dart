@@ -10,3 +10,5 @@ class CartRemoveFromCartEvent extends CartEvent {
 
   CartRemoveFromCartEvent({required this.productDataModel});
 }
+
+class CheckOutButtonNavigateEvent extends CartEvent {}

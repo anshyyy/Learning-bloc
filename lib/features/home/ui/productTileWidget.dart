@@ -14,7 +14,7 @@ class ProductTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 222,
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -88,7 +88,6 @@ class ProductTileWidget extends StatelessWidget {
                               clickedproduct: productDataModel));
                         },
                         icon: Icon(Icons.favorite_outlined)),
-                    SizedBox(width: 10),
                     IconButton(
                         onPressed: () {
                           homeBloc.add(HomeProductCartButtonClickedEvent(

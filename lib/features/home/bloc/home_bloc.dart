@@ -16,7 +16,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitalEvent>(homeInitalEvent);
     on<HomeProductWishlistButtonClickedEvent>(
         homeProductWishlistButtonClickedEvent);
-
     on<HomeProductCartButtonClickedEvent>(homeProductCartButtonClickedEvent);
     on<HomeWishlistButtonNavigateEvent>(homeWishlistButtonNavigateEvent);
     on<HomeCartButtonNavigateEvent>(homeCartButtonNavigateEvent);
@@ -24,7 +23,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeInitalEvent(
       HomeInitalEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 10));
     emit(HomeLoadedSuccessState(
         products: GroceryData.fruits
             .map((e) => ProductDataModel(

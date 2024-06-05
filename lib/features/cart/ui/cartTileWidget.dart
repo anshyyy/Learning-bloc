@@ -18,7 +18,7 @@ class _CartTileWidgetState extends State<CartTileWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 230,
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
